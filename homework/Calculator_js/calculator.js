@@ -1,14 +1,12 @@
 const number1 = prompt("Enter a number: ");
-if (!number1) {
+if (!Number(number1)) {
   console.log("You have not entered a valid number!")
 }
-
 
 const number2 = prompt("Enter a second number: ");
-if (!number2) {
+if (!Number(number2)) {
   console.log("You have not entered a valid number!")
 }
-
 
 const operator = prompt("Enter one of the following operators: +, -, *, /, %");
 if (!operator ) {
@@ -47,6 +45,7 @@ switch (operator) {
     }
   }
   default: {
+    console.log("You didn't enter valid numbers or operator.")
     break;
   }
 }
