@@ -1,0 +1,12 @@
+body {
+  margin: 2m;
+  font-family: sans-serif;
+  font-size: large;
+}
+
+button {
+  font-size: larger;
+  background-color: white;
+  text-align: left;
+  width: 100%;
+}
