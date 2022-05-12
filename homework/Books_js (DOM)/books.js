@@ -32,21 +32,23 @@ h1.textContent = "List of books:";
 body.append(h1);
 
 const button = document.createElement("button");
-button.textContent = "CLIC TO SEE THE LIST!";
-// button.addEventListener("click", booksList());
+button.textContent = "CLICK TO SEE THE LIST!";
 body.append(button);
 
 button.onclick = function () {
   const ul = document.createElement("ul");
-  
+
   for (let i = 0; i < books.length; i++) {
     let liName = document.createElement("li");
     liName.textContent = "Name: " + books[i].name;
+    liName.setAttribute("class", "name");
 
     let ulSubb = document.createElement("ul");
+    ulSubb.setAttribute("class", "ul");
 
     let liAuthor = document.createElement("li");
     liAuthor.textContent = "Author: " + books[i].author;
+
 
     let liYear = document.createElement("li");
     liYear.textContent = "Year: " + books[i].year;
@@ -55,6 +57,6 @@ button.onclick = function () {
     liName.append(ulSubb);
     ul.append(liName);
   }
-  
+
   button.append(ul);
 };
