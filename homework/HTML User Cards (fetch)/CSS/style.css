@@ -1,0 +1,44 @@
+body {
+  font-family: sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  text-align: center;
+  color: goldenrod;
+  margin-bottom: 1em;
+}
+
+#container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.cardBlock {
+  background-color: #e3ecf5;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 300px;
+  border: 1px solid gray;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.cardBlock h1 {
+  color: blueviolet;
+  font-size: large;
+  margin: 1em 0.5em;
+}
+
+.cardBlock p {
+  margin: 0;
+  color: #474747;
+
+}
