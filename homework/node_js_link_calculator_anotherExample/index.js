@@ -16,29 +16,25 @@ const fileRead = (filename) => {
 const findResult = (request, htmlContent) => {
   const qs = url.parse(request.url, true).query;
   let [operator, _] = request.url.split("?");
-  operator = operator.replace(/\//, "");
   let result = "";
 
-  if (operator === "divide" && qs.b === "0") {
+  if (operator === "/divide" && qs.b === "0") {
     result =
-      "No number is divideable with 0! Choose another number not equal to zero.";
+      "You have not put a proper operator in the URL! No number is divideable with 0! Choose another number not equal to zero.";
     return (htmlContent = htmlContent.replace(/{{res}}/, result));
   } else {
     switch (operator) {
-      case "plus":
+      case "/plus":
         result = `${Number(qs.a) + Number(qs.b)}`;
         break;
-      case "minus":
+      case "/minus":
         result = `${Number(qs.a) - Number(qs.b)}`;
         break;
-      case "multiply":
+      case "/multiply":
         result = `${Number(qs.a) * Number(qs.b)}`;
         break;
-      case "divide":
+      case "/divide":
         result = `${Number(qs.a) / Number(qs.b)}`;
-        break;
-      default:
-        result = "You have not put a proper operator in the URL!";
         break;
     }
     return (htmlContent = htmlContent.replace(/{{res}}/, result));
@@ -70,9 +66,17 @@ const server = http
     // http://localhost:8080/users?a=10&b=5
     // /users?a=10&b=5
     // /users                                     a=10&b=5
-
     let [path, _] = req.url.split("?");
-    if (pages[path]) {
+    if (
+      path !== "/plus" &&
+      path !== "/minus" &&
+      path !== "/multiply" &&
+      path !== "/divide"
+    ) {
+      res.end(
+        `You have put invalid operator! (You have to put plus, minus, multiply or divide as operator)`
+      );
+    } else if (pages[path]) {
       pages[path](req, res);
     } else {
       res.end("");
