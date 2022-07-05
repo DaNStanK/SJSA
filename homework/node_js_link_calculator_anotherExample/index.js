@@ -13,50 +13,48 @@ const fileRead = (filename) => {
   });
 };
 
-const findResult = (request, htmlContent) => {
+const findResult = (request, htmlContent, operator) => {
   const qs = url.parse(request.url, true).query;
-  let [operator, _] = request.url.split("?");
   let result = "";
 
-  if (operator === "/divide" && qs.b === "0") {
+  if (operator === "divide" && qs.b === "0") {
     result =
       "You have not put a proper operator in the URL! No number is divideable with 0! Choose another number not equal to zero.";
-    return (htmlContent = htmlContent.replace(/{{res}}/, result));
   } else {
     switch (operator) {
-      case "/plus":
+      case "plus":
         result = `${Number(qs.a) + Number(qs.b)}`;
         break;
-      case "/minus":
+      case "minus":
         result = `${Number(qs.a) - Number(qs.b)}`;
         break;
-      case "/multiply":
+      case "multiply":
         result = `${Number(qs.a) * Number(qs.b)}`;
         break;
-      case "/divide":
+      case "divide":
         result = `${Number(qs.a) / Number(qs.b)}`;
         break;
     }
-    return (htmlContent = htmlContent.replace(/{{res}}/, result));
   }
+  return htmlContent.replace(/{{res}}/, result);
 };
 
 const pages = {
   "/plus": async (req, res) => {
     let content = await fileRead("./index.html");
-    res.end(findResult(req, content));
+    res.end(findResult(req, content, "plus"));
   },
   "/minus": async (req, res) => {
     let content = await fileRead("./index.html");
-    res.end(findResult(req, content));
+    res.end(findResult(req, content, "minus"));
   },
   "/multiply": async (req, res) => {
     let content = await fileRead("./index.html");
-    res.end(findResult(req, content));
+    res.end(findResult(req, content, "multiply"));
   },
   "/divide": async (req, res) => {
     let content = await fileRead("./index.html");
-    res.end(findResult(req, content));
+    res.end(findResult(req, content, "divide"));
   },
 };
 
@@ -67,19 +65,12 @@ const server = http
     // /users?a=10&b=5
     // /users                                     a=10&b=5
     let [path, _] = req.url.split("?");
-    if (
-      path !== "/plus" &&
-      path !== "/minus" &&
-      path !== "/multiply" &&
-      path !== "/divide"
-    ) {
-      res.end(
-        `You have put invalid operator! (You have to put plus, minus, multiply or divide as operator)`
-      );
-    } else if (pages[path]) {
+    if (pages[path]) {
       pages[path](req, res);
     } else {
-      res.end("");
+      res.end(
+        "You have put invalid operator! (You have to put plus, minus, multiply or divide as operator)"
+      );
     }
   })
   .listen(8080);
