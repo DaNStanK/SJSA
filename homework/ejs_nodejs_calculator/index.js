@@ -16,8 +16,7 @@ app.get("/calculator", (req, res) => {
 app.post("/calculator-result", (req, res) => {
   try {
     let output;
-    let operator = req.body.operation;
-    switch (operator) {
+    switch (req.body.operation) {
       case "+":
         output = Number(req.body.number_1) + Number(req.body.number_2);
         break;
@@ -32,7 +31,7 @@ app.post("/calculator-result", (req, res) => {
         break;
     }
     res.render("calculator_output", { result: output });
-  } catch (error) {
+  } catch (err) {
     res.send(err);
   }
 });
