@@ -1,4 +1,5 @@
 let express = require("express");
+let handlers = require("./handlers");
 let port = 8080;
 let app = express();
 
@@ -13,28 +14,7 @@ app.get("/calculator", (req, res) => {
   }
 });
 
-app.post("/calculator-result", (req, res) => {
-  try {
-    let output;
-    switch (req.body.operation) {
-      case "+":
-        output = Number(req.body.number_1) + Number(req.body.number_2);
-        break;
-      case "-":
-        output = Number(req.body.number_1) - Number(req.body.number_2);
-        break;
-      case "/":
-        output = Number(req.body.number_1) / Number(req.body.number_2);
-        break;
-      case "*":
-        output = Number(req.body.number_1) * Number(req.body.number_2);
-        break;
-    }
-    res.render("calculator_output", { result: output });
-  } catch (err) {
-    res.send(err);
-  }
-});
+app.post("/calculator-result", handlers.calculator);
 
 app.listen(port, (err) => {
   if (err) return console.log(err);
