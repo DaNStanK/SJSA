@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+
+  <body>
+
+    <form method="post" action="/calculator-result">
+      <label>
+        <span>Number 1</span>
+        <input type="number" name="number_1" placeholder="Number 1" required />
+      </label>
+      <label>
+        <span>Choose operator:</span>
+        <select name="operation">
+          <option value="+" selected>+</option>
+          <option value="-">-</option>
+          <option value="/">/</option>
+          <option value="*">*</option>
+        </select>
+      </label>
+      <label>
+        <span>Number 2</span>
+        <input type="number" name="number_2" placeholder="Number 2" required />
+      </label>
+      <button type="submit">Presmetaj</button>
+    </form>
+
+  </body>
+
+</html>
