@@ -1,4 +1,4 @@
-let calculator = async (req, res) => {
+let calculator = (req, res) => {
   try {
     let output;
     switch (req.body.operation) {
